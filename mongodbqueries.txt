@@ -1,0 +1,68 @@
+collection.find({}) brings everything
+
+if we write any key in find it finds that data
+
+i.e find({where}, {population})
+where--> kis key se match krna ha
+population --> what key you want  to look at
+find({emp_dept : "tech", emp_band : 1})
+1 ka matlb ye wali key dekhni ha, sirf yahi wali key aayegi
+aur agr 0 hoga to mtlb is k elawa saari fields le aa
+
+find({emp_dept : "tech"}, {emp_band : "4"})
+lekin population ki key bhi match honi chahiye tb hi user aayega
+
+_id hr baar khud hi aayegi to rokne k liye _id : 0 de do population mn
+
+agr keys k lihaaz se searching krni ha key exist krti ha ya nhi
+
+db.find({keyname : {$exist : 1}})
+jis jis data keyname key hogi wo le aayega
+
+or 
+
+db.find({keyname : {$exist : 0})
+
+in mongodb we call saved objects as DOCUMENT
+
+find({emp_fname : /j/}) uses regular expression that means mongo allows regular expression
+
+brings all docs with emp_fname starting with small j.(mongo case sensitive)
+
+
+find({emp_fname : /j/i}) or find({emp_fname : /^j/i}) i is the iterator and ^ is the case sensitive disabler
+
+brings all docs with emp_fname starting with either capital or small j.(mongo case sensitive)
+
+.find({$or: [ {emp_dept : "Technology"}, {emp_band : "C1"}]})
+
+brings which either contain emp_dept : "Technology" or emp_band : "C1" or both
+
+
+object ko . kr k use karenge
+
+find({arrayname : "searchvalue"})
+array main simple search ho ga
+
+array main agar aisa search krna ha k sirf 2 cheezon incklude hn
+arrayname : $in : { ["angular","mongo"] }
+ye or ki condition 
+
+agar and ki lagani ha to
+$all
+
+array of object ko bhi object ki tarah access karenge
+
+elemMatch to match keys of object
+
+find({address : {$elemMatch: { house_no : 145, flat_no : 13 })
+
+agra mujhe simple keys mn se aise search krna ha k  ye na ho wo sb le aa
+$ne(notequal) : "Jason"
+
+agar check krna ha 
+
+lesser aur greater ki bhi queries hn
+find('address.house_no": {$lt : 50})
+
+https://blog.exploratory.io/an-introduction-to-mongodb-query-for-beginners-bd463319aa4c
